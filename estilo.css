@@ -1,0 +1,76 @@
+@import "compass/css3";
+
+// Defaults
+$columns-count: 5;
+$columns-gutter: 20px !default;
+$columns-container-class: "cols" !default;
+$columns-span-class: "cols-span" !default;
+
+// Main mixin to create a set of classes for the Retro Column System
+@mixin columns(
+  $max-columns: $columns-count,
+  $gutter: $columns-gutter,
+  $container-class: $columns-container-class,
+  $span-class: $columns-span-class
+) {
+  @for $columns from 2 through $max-columns {
+    .#{$container-class}-#{$columns} {
+      @include column-container($columns);
+      @include column-spans($columns, $gutter, $span-class);
+    }
+  }
+}
+
+// Styles for a column container
+@mixin column-container($columns: $columns-count, $gutter: $columns-gutter) {
+  display: table;
+  width: calc(100% + #{$gutter});
+  margin: 0 (-$gutter / 2);
+
+  // For some reason IE9 doesn't support calc with display:table. This means
+  // that the total width of the columns is equal to 100% - $gutter on IE9
+  // (which is probably okay for what we are doing with this).
+  .ie9 & {
+    width: 100%;
+  }
+}
+
+// Styles for the colspans of a column container
+@mixin column-spans(
+  $columns,
+  $gutter: $columns-gutter,
+  $span-class: $columns-span-class
+) {
+  $column-width: 100% / $columns;
+
+  #{enumerate("." + $span-class, 1, $columns)} {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 ($gutter / 2);
+    box-sizing: border-box;
+  }
+
+  @for $n from 1 through $columns {
+    .#{$span-class}-#{$n} {
+      width: ($column-width * $n);
+    }
+  }
+}
+
+body {
+  font-family: sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  padding: 20px 60px 60px;
+  line-height: 1.4;
+}
+
+@include columns();
+
+.box {
+  height: 40px;
+  line-height: 40px;
+  background: #e5e5e5;
+  text-align: left;
+  margin-bottom: 10px;
+}
