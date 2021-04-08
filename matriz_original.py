@@ -1,4 +1,4 @@
-class Matriz_Original:
+class Matriz:
     
     #CONSTRUCTOR
     def __init__(self, nombre, filas, columnas, matriz_ortogonal, vacios, llenos , fecha_hora):
