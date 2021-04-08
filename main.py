@@ -2,6 +2,7 @@ if __name__ == '__main__':
 
     import xml.etree.ElementTree as ET
     import numpy as np
+    import webbrowser
     from tkinter import *
     from tkinter import filedialog
     from tkinter import messagebox
@@ -193,6 +194,47 @@ if __name__ == '__main__':
     def Alerta_tkinter(mensaje):
         messagebox.showinfo(message= mensaje , title="Alerta")
 
+    def Documento():
+
+        f = open('Reporte.html','w')
+
+        mensaje = """
+        <link href="estilo.css" rel="stylesheet">
+        """
+        f.write(mensaje)
+
+        if len(matrices)>0:
+            f.write("""<h1>Matrices Registradas</h1>\n""")
+            for n in range(len(matrices)):
+                string = str(matrices[n].getFecha_hora()) + "   -   Nombre: " + str(matrices[n].getNombre()) + "   -   Espacios llenos: " + str(matrices[n].getLlenos())  + "   -   Espacios vacios: " + str(matrices[n].getVacios())
+            
+                f.write("""<div class="cols-3">\n""")
+                f.write("""  <div class="cols-span-3">\n""")
+                f.write("""    <div class="box">""")
+                f.write("Contenido:")
+                f.write(string)
+                f.write("""</div>\n""")
+                f.write("""  </div>\n""")
+                f.write("""</div>\n""")
+
+
+        if len(errores)>0:
+            f.write("""<h1>Errores Registrados</h1>\n""")
+            for n in range(len(errores)):
+                string = str(errores[n].getFecha_hora()) + "   -   Descripción: " + str(errores[n].getDescripcion())
+            
+                f.write("""<div class="cols-3">\n""")
+                f.write("""  <div class="cols-span-3">\n""")
+                f.write("""    <div class="box">""")
+                f.write("Contenido:")
+                f.write(string)
+                f.write("""</div>\n""")
+                f.write("""  </div>\n""")
+                f.write("""</div>\n""")
+
+        f.close()
+        webbrowser.open_new('Reporte.html')
+
     def interfaz():
 
         def cambio( img_antes, img_despues):
@@ -371,7 +413,6 @@ if __name__ == '__main__':
 
                 else:
                     Alerta_tkinter("No se encontró la matriz")
-
                 
         def operaciones():
 
@@ -453,7 +494,7 @@ if __name__ == '__main__':
 
         #Botones Principales
         boton1= Button(master=frame_botones_1, text="Cargar Archivo", font=12, padx = 92, command=selector_archivos)
-        boton2= Button(master=frame_botones_1, text="Reportes" , font=12, padx = 92 , command=boton_1)
+        boton2= Button(master=frame_botones_1, text="Reportes" , font=12, padx = 92 , command= Documento )
         boton3= Button(master=frame_botones_1, text="Ayuda",font=12, padx = 92 , command=boton_1)
         boton1.grid(row=0, column = 0)
         boton2.grid(row=0, column = 1,padx=5, pady=5)
