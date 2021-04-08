@@ -13,7 +13,6 @@ if __name__ == '__main__':
     from matriz import Matriz
     from nodos import Nodo_Encabezado, Nodo_Interno
     from encabezado import Lista_encabezado
-    from operacion import Operacion
 
     from PIL import Image
     from datetime import datetime
@@ -21,7 +20,6 @@ if __name__ == '__main__':
 
     matrices=[]
     errores=[]
-    operaciones=[]
     
 
     def crear_imagen(matriz_madre ,filas , columnas, nombre):
