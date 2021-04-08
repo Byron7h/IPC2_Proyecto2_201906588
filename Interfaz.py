@@ -3,6 +3,11 @@
 # https://docs.hektorprofe.net/python/interfaces-graficas-con-tkinter/widget-label-etiqueta-de-texto/
 # https://www.delftstack.com/es/howto/python-tkinter/how-to-create-dropdown-menu-in-tkinter/
 # destroy https://www.youtube.com/watch?v=A6m7TmjuNzw
+#filelog https://recursospython.com/guias-y-manuales/cuadros-de-dialogo-messagebox-en-tkinter/
+# numppy https://www.analyticslane.com/2019/09/04/numpy-basico-creacion-de-un-array-de-numpy-a-partir-de-una-listas-o-tuplas/
+# # imagen https://www.javaer101.com/es/article/1810513.html
+# Pil pillow imagenes https://recursospython.com/guias-y-manuales/instalar-pil-pillow-efectos/
+# https://www.semicolonworld.com/question/56158/how-to-update-the-image-of-a-tkinter-label-widget
 # Vamos a usar Tkinter 
 
 #(1) Importamos tkinter y todo lo que tiene su librería

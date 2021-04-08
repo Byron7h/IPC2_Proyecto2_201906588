@@ -1,0 +1,89 @@
+    def interfaz():
+
+        def cambio( img_antes, img_despues):
+
+            img_antes_now = PhotoImage(file="antes.png")
+            ima.configure(image=img_antes_now)
+            ima.image = img_antes_now
+
+            img_despues_now = PhotoImage(file="despues.png")
+            iman.configure(image=img_despues_now)
+            iman.image = img_despues_now
+
+        def hecho(nueva_OP):
+            # analizando que no vengan vacios
+            contiene_vacios = False
+            for clave in nueva_OP:
+                if nueva_OP[clave] == "":
+                    contiene_vacios = True
+            if contiene_vacios:
+                Alerta_tkinter("Existen campos sin llenar")
+            else:
+
+                # Viendo si la matriz existe
+                matriz_existe = False
+                for w in range(len(matrices)):
+                    if matrices[w].getNombre() == nueva_OP['nombre_matriz']:
+                        matriz_existe = True
+                        break
+                if matriz_existe:
+
+                #Operaciones
+                    if str(nueva_OP['operacion']) == "1 Matriz - Rotación horizontal":
+                        
+                        matriz_ortogonal = matrices[w].getmatriz_ortogonal()
+                        filas = matrices[w].getFilas()
+                        columnas = matrices[w].getColumnas()
+                        matriz_madre=np.zeros((int(filas),int(columnas)))
+
+                        #Extraemos los datos de la matriz ortogonal
+                        eFila = matriz_ortogonal.Encabezado_Filas.primero
+                        while eFila != None:
+                            actual = eFila.acceso
+                            while actual != None:
+                                matriz_madre[actual.fila][actual.columna]=1
+                                actual = actual.derecha           
+                            eFila = eFila.siguiente        
+
+                        print(matriz_madre)
+
+                        # Hacemos el cambio
+                        matriz_producto=np.zeros((int(filas),int(columnas)))
+
+                        for n in range(int(filas)):
+                            for m in range(int(columnas)):
+                                if matriz_madre[n][m]==1:
+                                    matriz_producto[n][int(columnas)-m]=1
+                        print(matriz_producto)
+
+                        img_antes = crear_imagen(matriz_madre ,int(filas) , int(columnas),"antes.png")
+                        img_despues = crear_imagen(matriz_producto ,int(filas) , int(columnas), "despues.png")
+
+                        cambio( img_antes, img_despues)
+
+
+
+
+
+                else:
+                    Alerta_tkinter("No se encontró la matriz")
+    def crear_imagen(matriz_madre ,filas , columnas, nombre):
+
+        lista_1 =[]
+        lista_2 =[]
+        for n in range(int(filas)):
+            for m in range(int(columnas)):
+                if matriz_madre[n][m] == 1:
+                    for a in range(25):
+                        lista_1.append([39, 39, 39])
+                
+                if matriz_madre[n][m] == 0:
+                    for a in range(25): 
+                        lista_1.append([224, 224, 224])
+            for a in range(25):            
+                lista_2.append(lista_1)
+            lista_1 =[]
+
+        np_array = np.array(lista_2)  
+        image = Image.fromarray(np_array.astype('uint8'), 'RGB')
+        image.save(str(nombre))

@@ -17,21 +17,4 @@
       ----------
     </imagen>
   </matriz>
-    <matriz>
-    <nombre>Matriz_2</nombre>
-    <filas>10</filas>
-    <columnas>10</columnas>
-    <imagen>
-      ----------
-      -***-***--
-      -*-----*--
-      -***-***--
-      ----------
-      ----------
-      -***-***--
-      --*--***--
-      --*--*----
-      -***-*----
-    </imagen>
-  </matriz>
 </matrices>
